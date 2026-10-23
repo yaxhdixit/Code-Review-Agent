@@ -1,0 +1,30 @@
+{
+  "task": "T-2",
+  "gate": "provider-tests",
+  "kind": "command",
+  "attempt": "41576dde-d98d-4f3d-9b22-21be5eee0ac2",
+  "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
+  "started_at": "2026-10-23T17:02:20.081Z",
+  "observed_at": "2026-10-23T17:02:20.285Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "",
+  "stderr": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.003s\n\nOK\n",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "3d4b5ec1ddec398c03ec3156b34c6e7512af72bb",
+    "dirty": true
+  },
+  "source_hash": "83f22b5475a170d9be74b4e094fede5046b715421bca7a8bbb601884af0a0c6d",
+  "before_hash": "83f22b5475a170d9be74b4e094fede5046b715421bca7a8bbb601884af0a0c6d",
+  "config_hash": "6d5389a6bf020bcd8446189c0be1a39e0203b5a51f7abc76f41f61ae57b4cfcb",
+  "environment": {
+    "node": "v26.8.1",
+    "platform": "darwin",
+    "arch": "arm64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "bfe77e8c9923c6cb837e231ec9c7b0e7992a219a7e02f4d070aafe240213ae3c"
+}

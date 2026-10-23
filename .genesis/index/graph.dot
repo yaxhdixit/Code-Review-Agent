@@ -1,0 +1,15 @@
+digraph genesis {
+  rankdir=LR;
+  node [shape=box,fontname="system-ui"];
+  "file:code_review_agent/__init__.py" [label="code_review_agent/__init__.py",class="file"];
+  "file:code_review_agent/__main__.py" [label="code_review_agent/__main__.py",class="file"];
+  "file:code_review_agent/cli.py" [label="code_review_agent/cli.py",class="file"];
+  "file:code_review_agent/git.py" [label="code_review_agent/git.py",class="file"];
+  "file:code_review_agent/providers.py" [label="code_review_agent/providers.py",class="file"];
+  "file:code_review_agent/reviewer.py" [label="code_review_agent/reviewer.py",class="file"];
+  "file:tests/test_e2e.py" [label="tests/test_e2e.py",class="file"];
+  "file:tests/test_git.py" [label="tests/test_git.py",class="file"];
+  "file:tests/test_providers.py" [label="tests/test_providers.py",class="file"];
+  "file:tests/test_reviewer.py" [label="tests/test_reviewer.py",class="file"];
+
+}

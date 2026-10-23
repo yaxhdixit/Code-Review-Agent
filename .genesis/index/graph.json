@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 2,
+  "project": "Code-Review-Agent",
+  "revision": "3d4b5ec1ddec398c03ec3156b34c6e7512af72bb",
+  "sourceHash": "5eb0bc83b2b0ec0456dcec653a4ea36d4953886f2e13069ffbf19462c6442b26",
+  "provenance": {
+    "tool": "genesis-graphizer",
+    "method": "static-analysis",
+    "confidenceScale": "0..1"
+  },
+  "nodes": [
+    {
+      "id": "file:code_review_agent/__init__.py",
+      "type": "file",
+      "label": "code_review_agent/__init__.py",
+      "path": "code_review_agent/__init__.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "ebadea053440504c529fa1c0b3b4d7b6388919e5436bd409c2fe572034dffb25"
+    },
+    {
+      "id": "file:code_review_agent/__main__.py",
+      "type": "file",
+      "label": "code_review_agent/__main__.py",
+      "path": "code_review_agent/__main__.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "1e42bd6bf21e18d50587394c04c78f2b0b7398bd73078d1d4740a00893d008b5"
+    },
+    {
+      "id": "file:code_review_agent/cli.py",
+      "type": "file",
+      "label": "code_review_agent/cli.py",
+      "path": "code_review_agent/cli.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "1fd5706b6a7730049421dc355237c79c4a20139f62a6c60ddb3bdeba39f141d2"
+    },
+    {
+      "id": "file:code_review_agent/git.py",
+      "type": "file",
+      "label": "code_review_agent/git.py",
+      "path": "code_review_agent/git.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "0f10634d1b979fc0088759c384ea5c044ffc8b9dac50ae09c5a9ce4a08bd6841"
+    },
+    {
+      "id": "file:code_review_agent/providers.py",
+      "type": "file",
+      "label": "code_review_agent/providers.py",
+      "path": "code_review_agent/providers.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "7dc40eef359102da141adfdaf6fec6a78d76de73eeeabb30b2835f8ac54a5a2e"
+    },
+    {
+      "id": "file:code_review_agent/reviewer.py",
+      "type": "file",
+      "label": "code_review_agent/reviewer.py",
+      "path": "code_review_agent/reviewer.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "01090d57e70af2faaa4c703f095ddf6834130264da44e3be878a30f4a503dfd9"
+    },
+    {
+      "id": "file:tests/test_e2e.py",
+      "type": "file",
+      "label": "tests/test_e2e.py",
+      "path": "tests/test_e2e.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "b8a7347c469932bd2862ff249a70b704be3f7a466f1a0a2e3da16f9125807dda"
+    },
+    {
+      "id": "file:tests/test_git.py",
+      "type": "file",
+      "label": "tests/test_git.py",
+      "path": "tests/test_git.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "f4f125cc4c8473e8f87a88a8c48216c1879858e06695bc615185bdae6a0390f1"
+    },
+    {
+      "id": "file:tests/test_providers.py",
+      "type": "file",
+      "label": "tests/test_providers.py",
+      "path": "tests/test_providers.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "2f6f1ad00ae7f62e67bb3bbc678de7022d98bbf5d56197c626a949d508d462c0"
+    },
+    {
+      "id": "file:tests/test_reviewer.py",
+      "type": "file",
+      "label": "tests/test_reviewer.py",
+      "path": "tests/test_reviewer.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "83d59fd648f862820a66581db353a50030db10d614e66d2148477570a54251ba"
+    }
+  ],
+  "edges": [],
+  "warnings": [
+    "Python AST unavailable: Traceback (most recent call last):\n  File \"<string>\", line 30, in <module>\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ast.py\", line 407, in visit\n    return visitor(node)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ast.py\", line 415, in generic_visit\n    self.visit(item)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ast.py\", line 407, in visit\n    return visitor(node)\n  File \"<string>\", line 7, in visit_Import\nAttributeError: module 'sys' has no attribute 'stdlib_module_names'"
+  ],
+  "stats": {
+    "unresolvedCalls": 0
+  }
+}

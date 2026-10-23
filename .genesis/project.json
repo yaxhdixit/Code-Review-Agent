@@ -1,0 +1,490 @@
+{
+  "schema_version": 2,
+  "project": {
+    "name": "Code-Review-Agent",
+    "mode": "init",
+    "profile": "prototype",
+    "objective": "A code Review Agent",
+    "constraints": [],
+    "non_goals": [],
+    "trust_boundary": "local repository",
+    "created_at": "2026-10-23T16:40:23.009Z",
+    "updated_at": "2026-10-23T17:11:21.673Z"
+  },
+  "policy": {
+    "ponytail": "full",
+    "autonomy": "human-in-the-loop",
+    "learned_rule_promotion": "human-required",
+    "cleanup": "propose-only",
+    "traces": {
+      "storage": "local",
+      "commit_raw": false,
+      "redact_secrets": true
+    }
+  },
+  "lifecycle": {
+    "phase": "verify",
+    "status": "ready",
+    "active_task": null,
+    "blocker": null,
+    "next_action": "Review completed work and choose the next bounded outcome."
+  },
+  "commands": {},
+  "workflow": {
+    "type": "new-product",
+    "started_at": "2026-10-23T16:40:23.012Z",
+    "spec_check": {
+      "at": "2026-10-23T16:45:14.663Z",
+      "source_hash": "fe66c64af16fc8f40db57a59ab3917b42fc364ad0ccc9dc04e2504326e50f7a4",
+      "requirements": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "FR-1",
+        "FR-2",
+        "FR-3",
+        "FR-4",
+        "FR-5",
+        "NFR-1",
+        "NFR-2",
+        "NFR-3",
+        "NFR-4"
+      ]
+    },
+    "plan_check": {
+      "at": "2026-10-23T16:55:15.822Z",
+      "source_hash": "cd16d5d793f023318dfbbb35ad5bf7d56984667d62de5484cd964b0369e8a6dc"
+    },
+    "plan_approval": {
+      "human": "Yash Dixit",
+      "reason": "User approved implementation plan to proceed",
+      "at": "2026-10-23T16:57:14.521Z",
+      "source_hash": "cd16d5d793f023318dfbbb35ad5bf7d56984667d62de5484cd964b0369e8a6dc"
+    }
+  },
+  "artifacts": [
+    {
+      "id": "SPEC-1",
+      "type": "specification",
+      "path": "SPEC.md",
+      "status": "approved",
+      "requirements": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "FR-1",
+        "FR-2",
+        "FR-3",
+        "FR-4",
+        "FR-5",
+        "NFR-1",
+        "NFR-2",
+        "NFR-3",
+        "NFR-4"
+      ],
+      "source_hash": "fe66c64af16fc8f40db57a59ab3917b42fc364ad0ccc9dc04e2504326e50f7a4",
+      "approval": {
+        "human": "Yash Dixit",
+        "reason": "User approved product specification to proceed",
+        "at": "2026-10-23T16:49:31.573Z",
+        "source_hash": "fe66c64af16fc8f40db57a59ab3917b42fc364ad0ccc9dc04e2504326e50f7a4"
+      }
+    }
+  ],
+  "assumptions": [],
+  "invariants": [],
+  "decisions": [
+    {
+      "id": "DECISION-a0b2cd3c",
+      "title": "Interface and Distribution",
+      "text": "Dual interface: CLI executable locally for git diff/staged reviews, and CI runner mode suitable for GitHub Actions.",
+      "status": "accepted",
+      "source": "User interview",
+      "recorded_at": "2026-10-23T16:43:52.534Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-813fe306",
+      "title": "Implementation Stack",
+      "text": "Python using standard library (urllib.request, json, argparse, subprocess) with zero external dependencies to ensure fast execution and minimal footprint.",
+      "status": "accepted",
+      "source": "User interview & Ponytail ladder",
+      "recorded_at": "2026-10-23T16:44:13.017Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-09603376",
+      "title": "Multi-Provider LLM Architecture",
+      "text": "Support Gemini (default/fallback), OpenAI, and Anthropic backends via standard environment keys (GEMINI_API_KEY, OPENAI_API_KEY, ANTHROPIC_API_KEY).",
+      "status": "accepted",
+      "source": "User interview",
+      "recorded_at": "2026-10-23T16:44:21.769Z",
+      "paths": [],
+      "tags": []
+    }
+  ],
+  "knowledge": [],
+  "tasks": [
+    {
+      "id": "SPEC-1",
+      "outcome": "Produce an approved, implementation-ready product specification",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "SPEC.md"
+      ],
+      "dependencies": [],
+      "requirements": [],
+      "gates": [
+        {
+          "id": "independent-review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "human": "Yash Dixit",
+            "reason": "User approved product specification to proceed",
+            "source_hash": "9f2e29b4c25cd208b4b1bf5ede156b0cd51c94cbccd853170b8c172c8f4d4571",
+            "observed_at": "2026-10-23T16:49:31.573Z"
+          },
+          "kind": "review"
+        }
+      ],
+      "next_action": "Interview the human, record durable context, and replace every placeholder in SPEC.md.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-23T16:40:23.012Z",
+      "updated_at": "2026-10-23T16:49:31.573Z"
+    },
+    {
+      "id": "T-1",
+      "outcome": "Implement git diff extraction, credential sanitization, CLI arguments, and error handling with zero external dependencies.",
+      "state": "done",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "code_review_agent/git.py",
+        "code_review_agent/cli.py",
+        "code_review_agent/__init__.py",
+        "code_review_agent/__main__.py",
+        "tests/test_git.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-1",
+        "NFR-1",
+        "NFR-2",
+        "NFR-3",
+        "NFR-4",
+        "AC-4"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [
+        {
+          "id": "sc-1",
+          "actor": "Developer",
+          "scope": "git diff extraction",
+          "environment": "local git repo",
+          "duration": "5s",
+          "observable": "git diff and staged changes correctly extracted and sanitized",
+          "gate": "unit-tests"
+        }
+      ],
+      "gates": [
+        {
+          "id": "unit-tests",
+          "kind": "command",
+          "command": "python3 -m unittest discover -s tests -p 'test_git.py'",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T-1-unit-tests-651856dc-ff93-4d7e-a561-bc233645bd05.json",
+            "hash": "f89c0b48926800e32476160b43244e2452170dd4371e931400d9e02e72b63f48",
+            "source_hash": "40b9843806cbe3adac00ceeb71a15dbcaa12e7033d2b84d7f8241acfc6b65121",
+            "config_hash": "48fa247a9f4298c677f0b5632659b1c5f113a232729c22aed3014002b5169a85",
+            "observed_at": "2026-10-23T16:59:39.012Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-23T16:51:21.397Z",
+      "updated_at": "2026-10-23T16:59:43.674Z",
+      "base_manifest": {
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "LICENSE": "e667c1a31123e0aae4bad2b555c267dc468290a4bcc54468a37ed3b269b93915",
+        "README.md": "4ae76ae60f1e4c9ee0b5a0094e1d9a7ba223e0ba64009333e48023a3943273c4",
+        "SPEC.md": "6b50ad8b0b08ef586bf8f6eb0bc8c58c9f33b4b393fd55cde0f0909e84c54baa"
+      }
+    },
+    {
+      "id": "T-2",
+      "outcome": "Implement Gemini, OpenAI, and Anthropic LLM API dispatchers, review prompts, and markdown/JSON output formatting.",
+      "state": "done",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "code_review_agent/providers.py",
+        "code_review_agent/reviewer.py",
+        "tests/test_providers.py",
+        "tests/test_reviewer.py"
+      ],
+      "dependencies": [
+        "T-1"
+      ],
+      "requirements": [
+        "FR-2",
+        "FR-3",
+        "FR-4",
+        "AC-1",
+        "AC-2"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [
+        {
+          "id": "sc-2",
+          "actor": "Developer / CI",
+          "scope": "review engine and provider dispatch",
+          "environment": "python3 runtime",
+          "duration": "10s",
+          "observable": "review prompt formed, mock provider responses parsed into structured markdown/json",
+          "gate": "provider-tests"
+        }
+      ],
+      "gates": [
+        {
+          "id": "provider-tests",
+          "kind": "command",
+          "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T-2-provider-tests-3c9143ae-feb9-45f9-ae46-7ccea5df4f52.json",
+            "hash": "6048d10502c045639181dd363c70ec63fe6631873da6fb9722a0585933b5ed5e",
+            "source_hash": "d161890a6610149ed55a916efe8bda536290b9d685e17b3dc8ad5beeb1b3f7c3",
+            "config_hash": "6d5389a6bf020bcd8446189c0be1a39e0203b5a51f7abc76f41f61ae57b4cfcb",
+            "observed_at": "2026-10-23T17:05:23.109Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-23T16:51:44.254Z",
+      "updated_at": "2026-10-23T17:05:28.617Z",
+      "base_manifest": {
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "LICENSE": "e667c1a31123e0aae4bad2b555c267dc468290a4bcc54468a37ed3b269b93915",
+        "README.md": "4ae76ae60f1e4c9ee0b5a0094e1d9a7ba223e0ba64009333e48023a3943273c4",
+        "SPEC.md": "6b50ad8b0b08ef586bf8f6eb0bc8c58c9f33b4b393fd55cde0f0909e84c54baa",
+        "code_review_agent/__init__.py": "8009cabef3eff957c36a84257072a09be512adf48238463ebe94cde7ec1c0db9",
+        "code_review_agent/__main__.py": "6a006d49b3ac1f28f975abc8340c5e2fb73ca8ba9f43effbc81e7ddb595987f1",
+        "code_review_agent/cli.py": "264366cc53db8fcbef29667b66c370dcf6b3833fa80c0bb7d801c96db6b48ceb",
+        "code_review_agent/git.py": "6c385bbcc068521ae7f63ba19cd87f80836076e0676a6b54546513d35f3cfc12",
+        "tests/test_git.py": "5188e48da20d891e0d0dacf3f93a756d12e392a1e83f59acfca3079e1d0dbeea"
+      }
+    },
+    {
+      "id": "T-3",
+      "outcome": "Complete end-to-end CLI integration, test suite verification, and GitHub Actions CI runner.",
+      "state": "done",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        ".github/workflows/code-review.yml",
+        "tests/test_e2e.py"
+      ],
+      "dependencies": [
+        "T-2"
+      ],
+      "requirements": [
+        "FR-5",
+        "AC-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [
+        {
+          "id": "sc-3",
+          "actor": "CI Runner / Developer",
+          "scope": "end-to-end review execution",
+          "environment": "GitHub Actions / local shell",
+          "duration": "10s",
+          "observable": "all acceptance criteria proven and CI workflow configured",
+          "gate": "all-tests"
+        }
+      ],
+      "gates": [
+        {
+          "id": "all-tests",
+          "kind": "command",
+          "command": "python3 -m unittest discover -s tests",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T-3-all-tests-d9d57b5f-d87e-45d9-9424-78aa0fe2b45e.json",
+            "hash": "51ff892026dbbdf8e51dbd078fcb3e46e17e9e1ad90b452f47960f8e4fd248a1",
+            "source_hash": "b544fea89b8e5ab049f932190bbd039c564f3597704d514219c061bea0437398",
+            "config_hash": "33056ba7e401e51aa46bea93535cdec41ad62e5820665063f367ecb362cd6cdb",
+            "observed_at": "2026-10-23T17:07:06.600Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-23T16:51:51.869Z",
+      "updated_at": "2026-10-23T17:07:10.567Z",
+      "base_manifest": {
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "LICENSE": "e667c1a31123e0aae4bad2b555c267dc468290a4bcc54468a37ed3b269b93915",
+        "README.md": "4ae76ae60f1e4c9ee0b5a0094e1d9a7ba223e0ba64009333e48023a3943273c4",
+        "SPEC.md": "6b50ad8b0b08ef586bf8f6eb0bc8c58c9f33b4b393fd55cde0f0909e84c54baa",
+        "code_review_agent/__init__.py": "8009cabef3eff957c36a84257072a09be512adf48238463ebe94cde7ec1c0db9",
+        "code_review_agent/__main__.py": "6a006d49b3ac1f28f975abc8340c5e2fb73ca8ba9f43effbc81e7ddb595987f1",
+        "code_review_agent/cli.py": "264366cc53db8fcbef29667b66c370dcf6b3833fa80c0bb7d801c96db6b48ceb",
+        "code_review_agent/git.py": "6c385bbcc068521ae7f63ba19cd87f80836076e0676a6b54546513d35f3cfc12",
+        "code_review_agent/providers.py": "d12517fa9ae0e96faf4ce3a40fac3a0e55ccf316dbce51b3fcfd81c225c49513",
+        "code_review_agent/reviewer.py": "c04b9044823e4f49f7562503c0de74f57ad6e117b7bef13c3d83cb0b06c86cf0",
+        "tests/test_git.py": "5188e48da20d891e0d0dacf3f93a756d12e392a1e83f59acfca3079e1d0dbeea",
+        "tests/test_providers.py": "cd654d5960ab06e27cdf56cb58ecddd5a766655f3f9db1cee68d4b81f8cb5cfb",
+        "tests/test_reviewer.py": "9b7b17772adc067044ceb176136b7761e928468b6da7af3feda7093e6848d720"
+      }
+    }
+  ],
+  "learning_proposals": [],
+  "cleanup_proposals": [],
+  "controls": [],
+  "attempts": [
+    {
+      "id": "651856dc-ff93-4d7e-a561-bc233645bd05",
+      "task": "T-1",
+      "kind": "gate",
+      "command": "python3 -m unittest discover -s tests -p 'test_git.py'",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 17174,
+      "child_pid": 17215,
+      "started_at": "2026-10-23T16:59:38.892Z",
+      "status": "passed",
+      "before_hash": "40b9843806cbe3adac00ceeb71a15dbcaa12e7033d2b84d7f8241acfc6b65121",
+      "config_hash": "48fa247a9f4298c677f0b5632659b1c5f113a232729c22aed3014002b5169a85",
+      "environment": {
+        "node": "v26.8.1",
+        "platform": "darwin",
+        "arch": "arm64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-23T16:59:39.012Z"
+    },
+    {
+      "id": "41576dde-d98d-4f3d-9b22-21be5eee0ac2",
+      "task": "T-2",
+      "kind": "gate",
+      "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 17626,
+      "child_pid": 17675,
+      "started_at": "2026-10-23T17:02:20.081Z",
+      "status": "passed",
+      "before_hash": "83f22b5475a170d9be74b4e094fede5046b715421bca7a8bbb601884af0a0c6d",
+      "config_hash": "6d5389a6bf020bcd8446189c0be1a39e0203b5a51f7abc76f41f61ae57b4cfcb",
+      "environment": {
+        "node": "v26.8.1",
+        "platform": "darwin",
+        "arch": "arm64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-23T17:02:20.285Z"
+    },
+    {
+      "id": "3c9143ae-feb9-45f9-ae46-7ccea5df4f52",
+      "task": "T-2",
+      "kind": "gate",
+      "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 17986,
+      "child_pid": 18067,
+      "started_at": "2026-10-23T17:05:22.925Z",
+      "status": "passed",
+      "before_hash": "d161890a6610149ed55a916efe8bda536290b9d685e17b3dc8ad5beeb1b3f7c3",
+      "config_hash": "6d5389a6bf020bcd8446189c0be1a39e0203b5a51f7abc76f41f61ae57b4cfcb",
+      "environment": {
+        "node": "v26.8.1",
+        "platform": "darwin",
+        "arch": "arm64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-23T17:05:23.109Z"
+    },
+    {
+      "id": "d9d57b5f-d87e-45d9-9424-78aa0fe2b45e",
+      "task": "T-3",
+      "kind": "gate",
+      "command": "python3 -m unittest discover -s tests",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 18506,
+      "child_pid": 18563,
+      "started_at": "2026-10-23T17:07:06.436Z",
+      "status": "passed",
+      "before_hash": "b544fea89b8e5ab049f932190bbd039c564f3597704d514219c061bea0437398",
+      "config_hash": "33056ba7e401e51aa46bea93535cdec41ad62e5820665063f367ecb362cd6cdb",
+      "environment": {
+        "node": "v26.8.1",
+        "platform": "darwin",
+        "arch": "arm64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-23T17:07:06.600Z"
+    }
+  ],
+  "authorizations": [],
+  "experiments": [],
+  "incidents": [],
+  "discovery": null,
+  "checkpoint": {
+    "at": "2026-10-23T17:11:21.643Z",
+    "revision": {
+      "commit": "3d4b5ec1ddec398c03ec3156b34c6e7512af72bb",
+      "dirty": true,
+      "source_hash": "668a7053c36f44fae20d43ee8e7c37850c4c27b37efec0825b22956e15588d0f"
+    },
+    "active_task": null,
+    "next_action": "Review completed work and choose the next bounded outcome."
+  },
+  "legacy": null
+}

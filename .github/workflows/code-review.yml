@@ -1,0 +1,37 @@
+name: "AI Code Review"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    name: "Automated Code Review"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: "Run Code Review Agent"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 -m code_review_agent --diff "origin/${{ github.base_ref }}" --output review.md
+          cat review.md >> $GITHUB_STEP_SUMMARY
+          if [ -n "$GITHUB_TOKEN" ] && [ -f review.md ]; then
+            gh pr comment "${{ github.event.pull_request.number }}" --body-file review.md || true
+          fi
