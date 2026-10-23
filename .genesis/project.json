@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-23T16:40:23.009Z",
-    "updated_at": "2026-10-23T17:11:21.673Z"
+    "updated_at": "2026-10-23T17:14:30.325Z"
   },
   "policy": {
     "ponytail": "full",
@@ -477,10 +477,10 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-23T17:11:21.643Z",
+    "at": "2026-10-23T17:14:30.296Z",
     "revision": {
-      "commit": "3d4b5ec1ddec398c03ec3156b34c6e7512af72bb",
-      "dirty": true,
+      "commit": "06218ae2c8ef37c5c4a9fa3848baad396fb8c9a9",
+      "dirty": false,
       "source_hash": "668a7053c36f44fae20d43ee8e7c37850c4c27b37efec0825b22956e15588d0f"
     },
     "active_task": null,

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "project": "Code-Review-Agent",
-  "revision": "3d4b5ec1ddec398c03ec3156b34c6e7512af72bb",
+  "revision": "06218ae2c8ef37c5c4a9fa3848baad396fb8c9a9",
   "sourceHash": "5eb0bc83b2b0ec0456dcec653a4ea36d4953886f2e13069ffbf19462c6442b26",
   "provenance": {
     "tool": "genesis-graphizer",
