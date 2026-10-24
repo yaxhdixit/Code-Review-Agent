@@ -1,0 +1,114 @@
+{
+  "benchmark_summary": {
+    "total_benchmark_cases": 40,
+    "defect_free_count": 16,
+    "cosmetic_count": 8,
+    "functional_bug_count": 8,
+    "critical_vulnerability_count": 8
+  },
+  "policies": [
+    {
+      "policy_name": "Policy A (Bayesian Expected Cost Minimization)",
+      "total_cases": 40,
+      "confusion_matrix": {
+        "true_positives": 16,
+        "false_positives": 24,
+        "true_negatives": 0,
+        "false_negatives": 0
+      },
+      "precision": 0.4,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "false_negative_rate": 0.0,
+      "human_review_rate": 0.0,
+      "total_decision_cost_usd": 1900.0,
+      "mean_brier_score": 0.1729
+    },
+    {
+      "policy_name": "Policy B (Naive LLM Zero-Shot Mode Selection)",
+      "total_cases": 40,
+      "confusion_matrix": {
+        "true_positives": 8,
+        "false_positives": 6,
+        "true_negatives": 18,
+        "false_negatives": 8
+      },
+      "precision": 0.5714,
+      "recall": 0.5,
+      "false_positive_rate": 0.25,
+      "false_negative_rate": 0.5,
+      "human_review_rate": 0.0,
+      "total_decision_cost_usd": 87390.0,
+      "mean_brier_score": 0.29
+    },
+    {
+      "policy_name": "Baseline (Heuristic CI Linters & Diff Churn)",
+      "total_cases": 40,
+      "confusion_matrix": {
+        "true_positives": 4,
+        "false_positives": 6,
+        "true_negatives": 18,
+        "false_negatives": 12
+      },
+      "precision": 0.4,
+      "recall": 0.25,
+      "false_positive_rate": 0.25,
+      "false_negative_rate": 0.75,
+      "human_review_rate": 0.175,
+      "total_decision_cost_usd": 139920.0,
+      "mean_brier_score": 0.31
+    }
+  ],
+  "failure_analyses": [
+    {
+      "case_id": "PR-28",
+      "title": "timezone naive datetime comparison in session expiration",
+      "failure_condition_name": "Silent Type Coercion / Naive Datetime Crash",
+      "actual_state": "functional_bug",
+      "heuristic_action": "approve",
+      "naive_llm_action": "approve",
+      "bayesian_action": "request_tests",
+      "highest_cost_explanation": "Naive LLM and Heuristic baseline approved this PR because diff was small (+7 lines) and tests passed. However, in production, offset-naive comparisons trigger a fatal unhandled TypeError upon token verification, crashing session auth (Cost: $2,000). The Bayesian agent requested tests due to the 'auth' prior, safely catching the bug at $50 cost."
+    },
+    {
+      "case_id": "PR-38",
+      "title": "auth: check password hash using non-constant time string equality",
+      "failure_condition_name": "Cryptographic Timing Side-Channel Inversion",
+      "actual_state": "critical_vulnerability",
+      "heuristic_action": "approve",
+      "naive_llm_action": "approve",
+      "bayesian_action": "escalate_human",
+      "highest_cost_explanation": "Replacing `hmac.compare_digest` with `==` looks innocuous to standard linters and mode-seeking LLMs because unit tests pass. Escaping to production exposes password hashes to statistical timing attacks ($25,000 cost). Bayesian agent flagged the auth subsystem and keyword alert, escalating to senior staff ($200 cost)."
+    },
+    {
+      "case_id": "PR-30",
+      "title": "perf: remove file lock around multi-process cache write",
+      "failure_condition_name": "Concurrency Lock Elimination Under Throughput Pressure",
+      "actual_state": "functional_bug",
+      "heuristic_action": "approve",
+      "naive_llm_action": "approve",
+      "bayesian_action": "request_tests",
+      "highest_cost_explanation": "Removing `fcntl.flock` appears as a performance optimization. Under concurrent worker load, cache files become corrupted and unreadable, causing production downtime ($2,000). The Bayesian agent routed to targeted load tests ($50)."
+    },
+    {
+      "case_id": "PR-37",
+      "title": "feat: proxy webhook events using user-supplied callback URL",
+      "failure_condition_name": "Unvalidated SSRF In Internal Cloud Metadata",
+      "actual_state": "critical_vulnerability",
+      "heuristic_action": "approve",
+      "naive_llm_action": "block",
+      "bayesian_action": "escalate_human",
+      "highest_cost_explanation": "Allowing user-controlled URLs enables SSRF against AWS metadata 169.254.169.254, leading to complete credential extraction ($25,000 breach). Heuristic baseline passed it because linters do not inspect HTTP target validation; Bayesian agent escalated to security review ($200)."
+    },
+    {
+      "case_id": "PR-17",
+      "title": "style: reorder import statements and add unused alias",
+      "failure_condition_name": "Spurious Developer Disruption / Nuisance Alarm",
+      "actual_state": "cosmetic",
+      "heuristic_action": "escalate_human",
+      "naive_llm_action": "approve",
+      "bayesian_action": "approve",
+      "highest_cost_explanation": "Heuristic baseline escalated this harmless diff to human review simply because flake8 flagged an unused alias, incurring $80 in senior engineer interruption. Bayesian agent evaluated expected loss and correctly approved at negligible $10 cosmetic cost."
+    }
+  ]
+}

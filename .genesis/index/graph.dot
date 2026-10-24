@@ -11,5 +11,8 @@ digraph genesis {
   "file:tests/test_git.py" [label="tests/test_git.py",class="file"];
   "file:tests/test_providers.py" [label="tests/test_providers.py",class="file"];
   "file:tests/test_reviewer.py" [label="tests/test_reviewer.py",class="file"];
+  "file:week1/deliverables/student-project/data/generate_dataset.py" [label="week1/deliverables/student-project/data/generate_dataset.py",class="file"];
+  "file:week1/deliverables/student-project/experiments/run_experiment.py" [label="week1/deliverables/student-project/experiments/run_experiment.py",class="file"];
+  "file:week1/deliverables/student-project/src/agent.py" [label="week1/deliverables/student-project/src/agent.py",class="file"];
 
 }
